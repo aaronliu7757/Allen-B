@@ -32,14 +32,14 @@
                 success:function(res){
                     if(res.error==1){
                         layer.msg(res.msg);
-                        $('#loging').html("<button class='btn btn-warning btn-block'>重新登陆</button>")
+                        $('#loging').html("<button class='btn btn-warning btn-block'>重新登录</button>")
                     }else if(res.error == 2){
                         layer.msg(res.msg);
-                        $('#loging').html("<button class='btn btn-info btn-block'>重新登陆</button>")
+                        $('#loging').html("<button class='btn btn-info btn-block'>重新登录</button>")
                     }else{
                         layer.msg(res.msg);
                         setTimeout(function(){window.location=res.url;},2000);
-                        $('#loging').html("<button class='btn btn-danger btn-block'>正在登陆</button>")
+                        $('#loging').html("<button class='btn btn-danger btn-block'>正在登录</button>")
                     }
                 }
             };
