@@ -63,7 +63,9 @@
                                                     <!-- <td class=" ">{$articles.content|msubstr=0,20,'utf-8',true}</td> -->
                                                     <td class="center ">{$articles.date}</td>
                                                     <td class="center ">{$articles.read_num}</td>
-                                                    <td class="center ">删除 修改</td>
+                                                    <td class="center "><a href="{:U('Article/ArticleDel',
+                array('id'=>$articles['id']))}">删除</a> <a href="{:U('Article/edit',
+                array('id'=>$articles['id']))}">修改</a></td>
                                                 </tr>
                                             </volist>
                                             </tbody>

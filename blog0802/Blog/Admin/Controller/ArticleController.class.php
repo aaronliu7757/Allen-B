@@ -21,6 +21,55 @@
         	$this->display();
 		}
 		public function add(){
+			$data = D('Labels')->fetchAll();
+			$this->assign('data',$data);
+			$res = D('Category')->fetchAll();
+			$this->assign('res',$res);
 			$this->display();
+		}
+
+		public function edit(){
+			$article_id=I('get.id');
+			$data = D('Labels')->fetchAll();
+			$this->assign('data',$data);
+			$res = D('Category')->fetchAll();
+			$this->assign('res',$res);
+			$ArticleModel = D('Articles');
+			$res=$ArticleModel ->where(array('id'=>$article_id))->find();
+			$this->assign('article',$res);
+			$this->display();
+	
+		}
+
+		public function ArticleAdd(){
+			if (IS_AJAX){
+	            $post = I('post.');
+	            $post['content'] = $_POST['articles'];
+	            $post['date'] = date('Y-m-d H:i:s',time());
+	            $ajax = D('Articles')->insertOne($post);
+	            $this->ajaxReturn($ajax);
+        	}else{
+            	echo '文章添加失败';
+        	}
+		}
+
+		public function ArticleDel(){
+			$ArticleModel = D('Articles');
+			$id = I('get.id');
+			if ($ArticleModel->where(array('id'=>$id))->delete()) {
+				$this->success('删除成功','',1);
+			}
+		}
+
+		public function ArticleEdit(){
+			if (IS_AJAX) {
+				$post = I('post.');
+				$post['content'] = $_POST['articles'];
+	            $post['date'] = date('Y-m-d H:i:s',time());
+	            $ajax = D('Articles')->editOne($post);
+	            $this->ajaxReturn($ajax);
+			}else{
+				echo "没有上传修改的文章";
+			}
 		}
 	}

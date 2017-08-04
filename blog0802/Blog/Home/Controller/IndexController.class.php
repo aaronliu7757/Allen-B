@@ -3,6 +3,21 @@ namespace Home\Controller;
 use Think\Controller;
 class IndexController extends Controller {
     public function index(){
-        $this->show('<style type="text/css">*{ padding: 0; margin: 0; } div{ padding: 4px 48px;} body{ background: #fff; font-family: "微软雅黑"; color: #333;font-size:24px} h1{ font-size: 100px; font-weight: normal; margin-bottom: 12px; } p{ line-height: 1.8em; font-size: 36px }</style><div style="padding: 24px 48px;"> <h1>:)</h1><p>欢迎使用 <b>ThinkPHP</b>！</p><br/>[ 您现在访问的是Blog/Home模块的Index控制器 ]</div><script type="text/javascript" src="http://tajs.qq.com/stats?sId=9347272" charset="UTF-8"></script>','utf-8');
+        $ArticlesModel = D('Articles');
+        $list =  $ArticlesModel ->fetchAll();
+        $hotArticles = $ArticlesModel->hotArticle();
+        $show =  $ArticlesModel ->countpage();
+        $this->assign('list',$list);
+        $this->assign('pages',$show);
+        $this->assign('hots',$hotArticles);
+        //这种方式实现也可以
+        /*$count = $ArticlesModel->count();
+        $Page = new \Think\Page($count,5);
+        $show = $Page->show();
+        $list = $ArticlesModel->alias('a')->join('lz_category b ON a.cat_id=b.cat_id')->order('a.id desc')->limit($Page->firstRow.','.$Page->listRows)->select();
+        $this->assign('list',$list);
+        $this->assign('pages',$show);*/
+       
+        $this->display();
     }
 }

@@ -62,7 +62,7 @@
                                                     <!-- <td class=" "><?php echo (msubstr($articles["content"],0,20,'utf-8',true)); ?></td> -->
                                                     <td class="center "><?php echo ($articles["date"]); ?></td>
                                                     <td class="center "><?php echo ($articles["read_num"]); ?></td>
-                                                    <td class="center ">删除 修改</td>
+                                                    <td class="center "><a href="<?php echo U('Article/ArticleDel', array('id'=>$articles['id']));?>">删除</a> <a href="<?php echo U('Article/edit', array('id'=>$articles['id']));?>">修改</a></td>
                                                 </tr><?php endforeach; endif; else: echo "" ;endif; ?>
                                             </tbody>
 

@@ -1,5 +1,13 @@
 <?php
-	
+
+	function getpage($count, $pagesize = 8) {
+		$p = new Think\Page($count, $pagesize);
+		$p -> setConfig('prev', '上一页');
+		$p -> setConfig('next', '下一页');
+		$p -> setConfig('theme', '%FIRST%%UP_PAGE%%LINK_PAGE%%DOWN_PAGE%%END%%HEADER%');
+		$p -> lastSuffix = false;
+		return $p;
+	}
 
 	function checkSession(){
 		if (session('id')=="" && session('username')=="") {
@@ -51,3 +59,18 @@
 		if($suffix) return $slice."…";
 		return $slice;
 	}
+	function cutArticle($data,$cut=0,$str="....")
+		{
+
+		    $data=strip_tags($data);//去除html标记
+		    $pattern = "/&[a-zA-Z]+;/";//去除特殊符号
+		    $data=preg_replace($pattern,'',$data);
+		    if(!is_numeric($cut))
+		        return $data;
+		    if($cut>0)
+		        $data=mb_strimwidth($data,0,$cut,$str);
+
+
+		    return $data;
+		}
+?>

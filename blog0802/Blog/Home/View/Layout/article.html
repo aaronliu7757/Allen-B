@@ -1,0 +1,29 @@
+<volist name="list" id="list">
+    <article class="excerpt excerpt-5" style=""><a class="focus" href="{:U('Articles/index',array('id' => $list['id']))}">
+        <img class="thumb" src="<if condition="$list['tit_img'] eq null">__PUBLIC__/Public/defult.jpg<else />{$list['tit_img']}</if>" alt="{$list['title']}" style="display: inline;" /></a>
+        <header><a class="cat"  title="MZ-NetBlog主题">{$list['cat_name']}<i></i></a>
+            <h2><a href="{:U('Articles/index',array('id' => $list['id']))}" title="{$list['title']}">{$list['title']}</a>
+            </h2>
+        </header>
+        <p class="meta">
+            <time class="time"><i class="glyphicon glyphicon-time"></i> {$list['date']}</time>
+            <span class="views"><i class="glyphicon glyphicon-eye-open"></i> {$list['read_num']}</span> <a class="comment" href="{:U('Articles/index',array('id' => $list['id']))}" title="评论"
+        ><i class="glyphicon glyphicon-comment"></i> 4</a>
+        </p>
+        <p class="note"><?php
+                            $data =  $list['content'] ;
+                              echo mb_substr(strip_tags(cutArticle($data)),0,120,'utf-8');
+                    ?>....</p>
+    </article>
+</volist>
+
+<div>
+    <include file="Public:pages" />
+    <br />
+    <br />
+    <div align="center">
+        <ul class="pages" >
+            {$pages}
+        </ul>
+    </div>
+</div>

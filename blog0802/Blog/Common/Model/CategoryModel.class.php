@@ -23,6 +23,10 @@
 				return false;
 			}
 		}
+
+		public function fetchAll(){
+			return $this->select();
+		}
 			
 	
 	}		
