@@ -1,6 +1,6 @@
 <volist name="list" id="list">
     <article class="excerpt excerpt-5" style=""><a class="focus" href="{:U('Articles/index',array('id' => $list['id']))}">
-        <img class="thumb" src="<if condition="$list['tit_img'] eq null">__PUBLIC__/Public/defult.jpg<else />{$list['tit_img']}</if>" alt="{$list['title']}" style="display: inline;" /></a>
+        <img class="thumb" src="<if condition="$list['tit_img'] eq null">__PUBLIC__/Public/defult.jpg<else />__ROOT__{$list['tit_img']}</if>" alt="{$list['tit_img']}" style="display: inline;" /></a>
         <header><a class="cat"  title="MZ-NetBlog主题">{$list['cat_name']}<i></i></a>
             <h2><a href="{:U('Articles/index',array('id' => $list['id']))}" title="{$list['title']}">{$list['title']}</a>
             </h2>

@@ -1,5 +1,5 @@
 <?php if (!defined('THINK_PATH')) exit(); if(is_array($list)): $i = 0; $__LIST__ = $list;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$list): $mod = ($i % 2 );++$i;?><article class="excerpt excerpt-5" style=""><a class="focus" href="<?php echo U('Articles/index',array('id' => $list['id']));?>">
-        <img class="thumb" src="<?php if($list['tit_img'] == null): ?>/0802/blog0802/Public/Public/defult.jpg<?php else: echo ($list['tit_img']); endif; ?>" alt="<?php echo ($list['title']); ?>" style="display: inline;" /></a>
+        <img class="thumb" src="<?php if($list['tit_img'] == null): ?>/0802/blog0802/Public/Public/defult.jpg<?php else: ?>/0802/blog0802<?php echo ($list['tit_img']); endif; ?>" alt="<?php echo ($list['tit_img']); ?>" style="display: inline;" /></a>
         <header><a class="cat"  title="MZ-NetBlog主题"><?php echo ($list['cat_name']); ?><i></i></a>
             <h2><a href="<?php echo U('Articles/index',array('id' => $list['id']));?>" title="<?php echo ($list['title']); ?>"><?php echo ($list['title']); ?></a>
             </h2>

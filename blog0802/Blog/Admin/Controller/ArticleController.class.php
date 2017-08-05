@@ -40,17 +40,38 @@
 			$this->display();
 	
 		}
-
+		public function uploads(){
+			$this->display();
+		}
 		public function ArticleAdd(){
-			if (IS_AJAX){
-	            $post = I('post.');
-	            $post['content'] = $_POST['articles'];
-	            $post['date'] = date('Y-m-d H:i:s',time());
-	            $ajax = D('Articles')->insertOne($post);
-	            $this->ajaxReturn($ajax);
-        	}else{
-            	echo '文章添加失败';
-        	}
+				$upload = new \Think\Upload();
+	   			$upload->maxSize =  3145728;
+	   			$upload->exts = array('jpg','gif','png','jpeg');
+	   			$upload->rootPath ='./Uploads/';
+	   			$upload->savepath = '';
+	   			$info =$upload->upload();
+	   			if(!$info){
+	   				$this->error($upload->getError());
+	   			}else{
+		   				$img_path1 ='./Uploads/'.$info['tit_img']['savepath'];
+		   				$img_path2=$info['tit_img']['savename'];	   			
+		    			$image =new \Think\Image();
+		    			$image->open($img_path1.$img_path2);
+		    			$img_thumb ='./Uploads/thumb/'.$img_path2;
+		    			$image->thumb(220,150)->save($img_thumb);
+		    			if (IS_AJAX){
+				            $post = I('post.');
+				            $post['tit_img']=ltrim($img_thumb,".");
+				            $post['content'] = $_POST['articles'];
+				            $post['date'] = date('Y-m-d H:i:s',time());
+				            $ajax = D('Articles')->insertOne($post);
+				            $this->ajaxReturn($ajax);		        
+        				}else{
+            				echo '文章添加失败';
+            				unlink($img_thumb);
+            				unlink($img_path1.$img_path2);
+        				}
+	    			}			
 		}
 
 		public function ArticleDel(){
